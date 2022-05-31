@@ -1,0 +1,55 @@
+@use "../../styles/colors" as *;
+
+.header {
+    width: 100%;
+    background-color: $primaryColor;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 4px;
+
+    @media (min-width: 360px) {
+        padding: 22px 22px;
+    }
+
+    @media (min-width: 1024px) {
+        padding: 22px 144px;
+    }
+
+    @media (min-width: 713px) {
+        flex-direction: row;
+    }
+
+    .brandName {
+        color: white;
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .navList {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        padding: 0;
+        text-align: center;
+        font-size: 1.5rem;
+        color: $secondaryColor;
+        @media (min-width: 285px) {
+            flex-direction: row;
+        }
+    }
+
+    .navItem {
+        cursor: pointer;
+        &:hover, &:focus-within{
+            color: #fce6ec;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+        @media (min-width: 285px) {
+        margin-right: 2rem;
+        }
+    }
+}
