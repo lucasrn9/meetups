@@ -15,11 +15,11 @@ a {
   box-sizing: border-box;
 }
 
-*:focus{
-  outline: none;
-  border: 2px solid black;
-  border-radius: 4px;
-}
+// *:focus{
+//   outline: none;
+//   border: 2px solid black;
+//   border-radius: 4px;
+// }
 
 @media (max-width:446px) {
   :root{

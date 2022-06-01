@@ -4,7 +4,11 @@ module.exports = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ["./jest.setup.ts"],
   transform: {
-    "^.+\\.js$": "babel-jest",
     ".+\\.(css|styl|less|sass|scss|png|jpg|svg|ttf|woff|woff2)$": "jest-transform-stub"
+  },
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.test.json'
+    }
   }
 };
