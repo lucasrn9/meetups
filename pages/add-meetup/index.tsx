@@ -3,20 +3,18 @@ import NewMeetupFormData from '../../types/NewMeetupFormData';
 import styles from './addMeetup.module.scss';
 
 const AddNewMeetupPage = () => {
-  const submitHandler = (
-    formData: NewMeetupFormData,
-    setStatusmessage: (value: string | PromiseLike<string>) => void
-  ) => {
-    setTimeout(() => {
-      try {
-        console.log(formData);
-        setStatusmessage('Your New Meetup Was Created');
-      } catch {
-        setStatusmessage(
-          'Error On Creating a New Meetup, Please Try Again Later'
-        );
-      }
-    }, 5000);
+  const submitHandler = async (formData: NewMeetupFormData) => {
+    try {
+      console.log(formData);
+      await fetch('https://jsonplaceholder.typicode.com/todos/1');
+      return {
+        message: 'Your New Meetup Was Created',
+      };
+    } catch {
+      return {
+        message: 'Error On Creating a New Meetup, Please Try Again Later',
+      };
+    }
   };
 
   return (

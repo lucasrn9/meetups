@@ -26,15 +26,28 @@ const NewMeetupForm = ({ submitHandler }: NewMeetupFormProps) => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const promise = (): Promise<string> => {
-      return new Promise((resolve) => {
-        submitHandler(formData, resolve);
+    const promise = (): Promise<{
+      message: string;
+    }> => {
+      return new Promise((resolve, reject) => {
+        try {
+          resolve(submitHandler(formData));
+        } catch {
+          reject();
+        }
       });
     };
     setIsSubmitInProgress(true);
-    const message = await promise();
-    setSubmitStatusMessage(message);
-    setIsSubmitInProgress(false);
+    const message = await promise().catch(() => {
+      setSubmitStatusMessage(
+        'Error On Creating a New Meetup, Please Try Again Later'
+      );
+      setIsSubmitInProgress(false);
+    });
+    if (message) {
+      setSubmitStatusMessage(message.message);
+      setIsSubmitInProgress(false);
+    }
   };
 
   return (

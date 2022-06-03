@@ -42,22 +42,19 @@ describe('NewMeetupForm', () => {
     await user.type(description, 'Desciption test');
     await user.click(addMeetupButton);
     expect(submitHandler).toHaveBeenCalledTimes(1);
-    expect(submitHandler).toHaveBeenCalledWith(
-      {
-        meetupTitle: 'Title test',
-        meetupImage: 'Image test',
-        city: 'City test',
-        street: 'Street test',
-        description: 'Desciption test',
-      },
-      expect.any(Function)
-    );
+    expect(submitHandler).toHaveBeenCalledWith({
+      meetupTitle: 'Title test',
+      meetupImage: 'Image test',
+      city: 'City test',
+      street: 'Street test',
+      description: 'Desciption test',
+    });
   });
 
   it('should show a success status message after the "Add Meetup" button is clicked and the request is successfully completed', async () => {
-    const submitHandler = jest.fn((formData, message) => {
-      message('Your New Meetup Was Created');
-    });
+    const submitHandler = jest.fn(() => ({
+      message: 'Your New Meetup Was Created',
+    }));
     render(<NewMeetupForm submitHandler={submitHandler} />);
     const user = userEvent.setup();
     const addMeetupButton = screen.getByRole('button', { name: 'Add Meetup' });
@@ -68,14 +65,12 @@ describe('NewMeetupForm', () => {
     expect(successStatusMessage).toBeVisible();
   });
 
-  it('should show an error status message after the "Add Meetup" button is clicked and the request fails', async () => {
-    const submitHandler = jest.fn((formData, message) => {
-      try {
-        throw new Error();
-        message('Your New Meetup Was Created');
-      } catch {
-        message('Error On Creating a New Meetup, Please Try Again Later');
-      }
+  it('should show an default error status message after the "Add Meetup" button is clicked and the request fails', async () => {
+    const submitHandler = jest.fn(() => {
+      throw new Error();
+      return {
+        message: 'Your New Meetup Was Created',
+      };
     });
     render(<NewMeetupForm submitHandler={submitHandler} />);
     const user = userEvent.setup();
