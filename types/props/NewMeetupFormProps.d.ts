@@ -1,4 +1,4 @@
-import NewMeetupFormData from './NewMeetupFormData';
+import NewMeetupFormData from '../NewMeetupFormData';
 
 export default interface NewMeetupFormProps {
   submitHandler: (

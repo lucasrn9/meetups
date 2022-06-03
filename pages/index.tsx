@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import MeetupCard from '../components/meetupCard/MeetupCard';
+import { MeetupCard } from '../components';
 import styles from './Home.module.css';
 
 const Home: NextPage = () => {

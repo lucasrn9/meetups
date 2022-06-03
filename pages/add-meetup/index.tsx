@@ -1,5 +1,5 @@
-import NewMeetupForm from '../../components/NewMeetupForm/NewMeetupForm';
-import NewMeetupFormData from '../../types/props/NewMeetupFormData';
+import { NewMeetupForm } from '../../components';
+import NewMeetupFormData from '../../types/NewMeetupFormData';
 import styles from './addMeetup.module.scss';
 
 const AddNewMeetupPage = () => {

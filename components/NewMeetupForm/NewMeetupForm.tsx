@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import NewMeetupFormProps from '../../types/props/NewMeetupFormProps';
+import { NewMeetupFormProps } from '../../types/props';
 import styles from './newMeetupForm.module.scss';
 
 const NewMeetupForm = ({ submitHandler }: NewMeetupFormProps) => {

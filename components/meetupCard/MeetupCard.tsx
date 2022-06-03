@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import MeetupCardsProps from '../../types/props/MeetupCardProps';
+import { MeetupCardProps } from '../../types/props';
 import styles from './meetupCard.module.scss';
 
 const MeetupCard = ({
@@ -9,7 +9,7 @@ const MeetupCard = ({
   city,
   imageSrc,
   imageAlt,
-}: MeetupCardsProps) => {
+}: MeetupCardProps) => {
   const meetupUrl = name.trim().toLowerCase().replace(/ /g, '-');
   return (
     <div className={styles.meetupCard}>
