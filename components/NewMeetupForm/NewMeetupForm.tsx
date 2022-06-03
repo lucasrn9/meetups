@@ -1,14 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import NewMeetupFormData from '../../types/props/NewMeetupFormData';
 import NewMeetupFormProps from '../../types/props/NewMeetupFormProps';
 import styles from './newMeetupForm.module.scss';
 
-const NewMeetupForm = ({
-  submitHandler,
-  isSubmitInProgress,
-  submitStatusMessage,
-}: NewMeetupFormProps) => {
-  const [formData, setFormData] = useState<NewMeetupFormData>({
+const NewMeetupForm = ({ submitHandler }: NewMeetupFormProps) => {
+  const [formData, setFormData] = useState({
     meetupTitle: '',
     meetupImage: '',
     city: '',
@@ -25,9 +20,21 @@ const NewMeetupForm = ({
     }));
   };
 
+  const [isSubmitInProgress, setIsSubmitInProgress] = useState(false);
+
+  const [submitStatusMessage, setSubmitStatusMessage] = useState<string>();
+
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    submitHandler(formData);
+    const promise = (): Promise<string> => {
+      return new Promise((resolve) => {
+        submitHandler(formData, resolve);
+      });
+    };
+    setIsSubmitInProgress(true);
+    const message = await promise();
+    setSubmitStatusMessage(message);
+    setIsSubmitInProgress(false);
   };
 
   return (
@@ -92,7 +99,7 @@ const NewMeetupForm = ({
       </label>
       {!submitStatusMessage ? null : <span>{submitStatusMessage}</span>}
       <button className={styles.addMeetupButton} type="submit">
-        {isSubmitInProgress ? 'loading' : 'Add Meetup'}
+        {isSubmitInProgress ? <div className={styles.spinner} /> : 'Add Meetup'}
       </button>
     </form>
   );

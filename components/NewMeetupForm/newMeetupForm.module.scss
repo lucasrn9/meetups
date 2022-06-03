@@ -40,6 +40,9 @@
 
     .addMeetupButton {
         align-self: flex-end;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 100%;
         max-width: 8.75rem;
         margin-top: 16px;
@@ -53,3 +56,18 @@
         cursor: pointer;
     }
 }
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #ffffff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
