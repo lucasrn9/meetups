@@ -1,26 +1,19 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import MeetupCardsProps from '../../types/props/MeetupCardProps';
+import { MeetupCardProps } from '../../types/props';
 import styles from './meetupCard.module.scss';
 
 const MeetupCard = ({
+  id,
   name,
   street,
   city,
   imageSrc,
   imageAlt,
-}: MeetupCardsProps) => {
-  const meetupUrl = name.trim().toLowerCase().replace(/ /g, '-');
+}: MeetupCardProps) => {
   return (
     <div className={styles.meetupCard}>
       <div className={styles.meetupImageWrapper}>
-        <Image
-          className={styles.meetupImage}
-          src={imageSrc}
-          alt={imageAlt}
-          width={650}
-          height={400}
-        />
+        <img className={styles.meetupImage} src={imageSrc} alt={imageAlt} />
       </div>
       <div className={styles.meetupDetails}>
         <h2 className={styles.meetupTitle}>{name}</h2>
@@ -28,7 +21,7 @@ const MeetupCard = ({
           {street}, {city}
         </span>
       </div>
-      <Link href={`/meetup-details/${meetupUrl}`}>
+      <Link href={`/meetup-details/${id}`}>
         <button className={styles.detailsButton} type="button">
           Show Details
         </button>
