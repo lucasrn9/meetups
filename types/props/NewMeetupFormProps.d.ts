@@ -1,11 +1,10 @@
 import NewMeetupFormData from '../NewMeetupFormData';
 
 export default interface NewMeetupFormProps {
-  submitHandler: (formData: NewMeetupFormData) =>
-    | {
-        message: string;
-      }
-    | Promise<{
-        message: string;
-      }>;
+  submitHandler: (
+    formData: NewMeetupFormData
+  ) => Promise<
+    | { error: ValidationError; message?: undefined }
+    | { message: string; error?: undefined }
+  >;
 }

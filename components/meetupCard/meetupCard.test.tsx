@@ -5,6 +5,7 @@ describe('MeetupCard', () => {
   it('should render the image passed as props', () => {
     render(
       <MeetupCard
+        id={1}
         name="meetup test"
         street="test street"
         city="test city"
@@ -13,15 +14,13 @@ describe('MeetupCard', () => {
       />
     );
     const image = screen.getByAltText('testAlt');
-    expect(image).toHaveAttribute(
-      'src',
-      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-    );
+    expect(image).toHaveAttribute('src', '/testSrc');
   });
 
   it('should render a heading with the meetup name, and should render the street and city passed as props', () => {
     render(
       <MeetupCard
+        id={1}
         name="meetup test"
         street="test street"
         city="test city"

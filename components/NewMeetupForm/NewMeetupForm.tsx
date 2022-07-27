@@ -8,6 +8,7 @@ const NewMeetupForm = ({ submitHandler }: NewMeetupFormProps) => {
     meetupImage: '',
     city: '',
     street: '',
+    number: '',
     description: '',
   });
 
@@ -26,26 +27,14 @@ const NewMeetupForm = ({ submitHandler }: NewMeetupFormProps) => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const promise = (): Promise<{
-      message: string;
-    }> => {
-      return new Promise((resolve, reject) => {
-        try {
-          resolve(submitHandler(formData));
-        } catch {
-          reject();
-        }
-      });
-    };
     setIsSubmitInProgress(true);
-    const message = await promise().catch(() => {
-      setSubmitStatusMessage(
-        'Error On Creating a New Meetup, Please Try Again Later'
-      );
+    const submit = await submitHandler(formData);
+    if (submit.error) {
+      setSubmitStatusMessage(submit.error.errors[0]);
       setIsSubmitInProgress(false);
-    });
-    if (message) {
-      setSubmitStatusMessage(message.message);
+    }
+    if (submit.message) {
+      setSubmitStatusMessage(submit.message);
       setIsSubmitInProgress(false);
     }
   };
@@ -63,6 +52,7 @@ const NewMeetupForm = ({ submitHandler }: NewMeetupFormProps) => {
           type="text"
           name="meetupTitle"
           id="meetupTitle"
+          required
           value={formData.meetupTitle}
           onChange={(e) => formDataHandler(e)}
         />
@@ -74,6 +64,7 @@ const NewMeetupForm = ({ submitHandler }: NewMeetupFormProps) => {
           type="text"
           name="meetupImage"
           id="meetupImage"
+          required
           value={formData.meetupImage}
           onChange={(e) => formDataHandler(e)}
         />
@@ -85,6 +76,7 @@ const NewMeetupForm = ({ submitHandler }: NewMeetupFormProps) => {
           type="text"
           name="city"
           id="city"
+          required
           value={formData.city}
           onChange={(e) => formDataHandler(e)}
         />
@@ -96,7 +88,20 @@ const NewMeetupForm = ({ submitHandler }: NewMeetupFormProps) => {
           type="text"
           name="street"
           id="street"
+          required
           value={formData.street}
+          onChange={(e) => formDataHandler(e)}
+        />
+      </label>
+
+      <label htmlFor="number">
+        Number
+        <input
+          type="text"
+          name="number"
+          id="number"
+          required
+          value={formData.number}
           onChange={(e) => formDataHandler(e)}
         />
       </label>
@@ -106,6 +111,7 @@ const NewMeetupForm = ({ submitHandler }: NewMeetupFormProps) => {
         <textarea
           name="description"
           id="description"
+          required
           value={formData.description}
           onChange={(e) => formDataHandler(e)}
         />

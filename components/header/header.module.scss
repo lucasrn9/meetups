@@ -23,7 +23,7 @@
 
     .brandName {
         color: white;
-        font-size: 2.5rem;
+        font-size: 2.3rem;
         font-weight: bold;
     }
 
@@ -42,14 +42,24 @@
 
     .navItem {
         cursor: pointer;
-        &:hover, &:focus-within{
+        &:hover,
+        &:focus-within {
             color: #fce6ec;
         }
         &:last-child {
             margin-right: 0;
         }
         @media (min-width: 285px) {
-        margin-right: 2rem;
+            margin-right: 2rem;
+        }
+    }
+
+    @media (max-width: 203px) {
+        .brandName {
+            font-size: 1.6rem;
+        }
+        .navItem {
+            font-size: 1.1rem;
         }
     }
 }

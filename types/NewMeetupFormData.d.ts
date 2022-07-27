@@ -3,5 +3,6 @@ export default interface NewMeetupFormData {
   meetupImage: string;
   city: string;
   street: string;
+  number: string;
   description: string;
 }
