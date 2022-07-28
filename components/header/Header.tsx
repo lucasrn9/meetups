@@ -8,7 +8,7 @@ const Header = () => {
       <nav>
         <ul className={styles.navList}>
           <li className={styles.navItem}>
-            <a href="http://localhost:3000">All Meetups</a>
+            <a href="/">All Meetups</a>
           </li>
           <li className={styles.navItem}>
             <Link href="/add-meetup">Add New Meetup</Link>
