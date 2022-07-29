@@ -1,9 +1,10 @@
 import yup, { object, string } from 'yup';
-
-const alphabeticCharacter = /^[A-Z a-z]+$/;
-const alphabeticCharacterMessage = 'must contain only alphabetical characters';
-const number = /^[0-9]+$/;
-const numberMessage = 'must contain only numbers';
+import {
+  number,
+  numberMessage,
+  alphabeticCharacter,
+  alphabeticCharacterMessage,
+} from './regex';
 
 const meetupSchema = object({
   meetupTitle: string()

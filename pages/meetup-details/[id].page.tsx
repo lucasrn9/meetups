@@ -5,6 +5,7 @@ import { MeetupDetailsCard } from '../../components';
 import styles from './meetupDetails.module.scss';
 import { MeetupDetailsProps } from '../../types/props/MeetupDetailsProps';
 import createConnectionPromise from '../../functions/createConnectionPromise';
+import meetupIdSchema from '../../schemas/meetupId';
 
 const MeetupDetails = ({ meetups }: MeetupDetailsProps) => {
   const router = useRouter();
@@ -48,7 +49,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const sqlQuery =
     'SELECT title,image_url,street,city,number,description FROM meetup WHERE id = ?';
   try {
-    const result = await connectionPromise.query(sqlQuery, meetupId);
+    const validMeetupId = await meetupIdSchema.validate(meetupId);
+    const result = await connectionPromise.query(sqlQuery, validMeetupId);
     if (result[0].toLocaleString().length === 0) {
       connectionPromise.end();
       return {
